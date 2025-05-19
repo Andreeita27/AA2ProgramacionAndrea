@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.svalero</groupId>
-    <artifactId>Restaurant</artifactId>
+    <artifactId>Peliculas</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
 
@@ -41,7 +41,7 @@
     </dependencies>
 
     <build>
-        <finalName>Restaurant</finalName>
+        <finalName>Peliculas</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -63,7 +63,7 @@
                     <configuration>
                         <url>http://localhost:8082/manager/text</url>
                         <server>tomcat9</server>
-                        <path>/restaurant</path>
+                        <path>/peliculas</path>
                         <username>admin</username>
                         <password>admin</password>
                     </configuration>
