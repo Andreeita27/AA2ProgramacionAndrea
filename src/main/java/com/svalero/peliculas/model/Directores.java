@@ -1,7 +1,6 @@
 package com.svalero.peliculas.model;
 
 import lombok.Data;
-
 import java.sql.Date;
 
 @Data

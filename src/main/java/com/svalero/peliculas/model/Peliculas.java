@@ -1,6 +1,7 @@
 package com.svalero.peliculas.model;
 
 import lombok.Data;
+import java.sql.Date;
 
 @Data
 public class Peliculas {
@@ -8,7 +9,7 @@ public class Peliculas {
     private String titulo;
     private String sinopsis;
     private int duracion;
-    private String fechaEstreno;
+    private Date fechaEstreno;
     private boolean disponibleStreaming;
     private String imagen;
     private int idDirector;
@@ -45,11 +46,11 @@ public class Peliculas {
         this.duracion = duracion;
     }
 
-    public String getFechaEstreno() {
+    public Date getFechaEstreno() {
         return fechaEstreno;
     }
 
-    public void setFechaEstreno(String fechaEstreno) {
+    public void setFechaEstreno(Date fechaEstreno) {
         this.fechaEstreno = fechaEstreno;
     }
 
