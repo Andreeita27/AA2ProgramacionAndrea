@@ -1,5 +1,6 @@
 package com.svalero.peliculas.dao;
 
+import com.svalero.peliculas.exception.PeliculaNoEncontradaExcepcion;
 import com.svalero.peliculas.model.Peliculas;
 
 import java.sql.*;
@@ -93,14 +94,14 @@ public class PeliculasDao {
         return peliculaList;
     }
 
-    public Peliculas get(int id) throws SQLException, PeliculaNotFoundException {
+    public Peliculas get(int id) throws SQLException, PeliculaNoEncontradaExcepcion {
         String sql = "SELECT * FROM peliculas WHERE id_pelicula = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setInt(1, id);
         ResultSet result = statement.executeQuery();
 
         if (!result.next()) {
-            throw new PeliculaNotFoundException();
+            throw new PeliculaNoEncontradaExcepcion();
         }
 
         Peliculas pelicula = new Peliculas();
