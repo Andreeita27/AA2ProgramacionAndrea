@@ -20,7 +20,6 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
-            <th>ID</th>
             <th>Título</th>
             <th>Duración (min)</th>
             <th>Fecha de Estreno</th>
