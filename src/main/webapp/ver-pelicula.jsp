@@ -19,13 +19,12 @@
 
   <div class="card">
     <div class="card-body">
+      <p class="card-text"><strong>Imagen:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getImagen() %></p>
       <h3 class="card-title"><%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getTitulo() %></h3>
-      <p class="card-text"><strong>ID:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getIdPelicula() %></p>
       <p class="card-text"><strong>Sinopsis:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getSinopsis() %></p>
       <p class="card-text"><strong>Duración:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getDuracion() %> minutos</p>
       <p class="card-text"><strong>Fecha de estreno:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getFechaEstreno() %></p>
       <p class="card-text"><strong>Disponible en streaming:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).isDisponibleStreaming() ? "Sí" : "No" %></p>
-      <p class="card-text"><strong>Imagen:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getImagen() %></p>
       <p class="card-text"><strong>ID Director:</strong> <%= ((com.svalero.peliculas.model.Peliculas)request.getAttribute("pelicula")).getIdDirector() %></p>
 
       <a href="listar-peliculas" class="btn btn-secondary mt-3">Volver al Listado</a>

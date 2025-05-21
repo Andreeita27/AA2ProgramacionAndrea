@@ -31,7 +31,6 @@
         <% for (int i = 0; i < ((java.util.List)request.getAttribute("peliculas")).size(); i++) {
             com.svalero.peliculas.model.Peliculas pelicula = (com.svalero.peliculas.model.Peliculas) ((java.util.List)request.getAttribute("peliculas")).get(i); %>
         <tr>
-            <td><%= pelicula.getIdPelicula() %></td>
             <td><%= pelicula.getTitulo() %></td>
             <td><%= pelicula.getDuracion() %></td>
             <td><%= pelicula.getFechaEstreno() %></td>
@@ -46,6 +45,21 @@
         <% } %>
         </tbody>
     </table>
+    <%
+        int currentPage = (request.getAttribute("currentPage") != null) ?
+                (Integer) request.getAttribute("currentPage") : 0;
+    %>
+
+    <div class="text-center mt-4">
+        <a href="listar-peliculas?page=<%= currentPage - 1 %>" class="btn btn-outline-primary me-2"
+                <%= (currentPage <= 0) ? "style='pointer-events:none;opacity:0.5;'" : "" %>>
+            Anterior
+        </a>
+
+        <a href="listar-peliculas?page=<%= currentPage + 1 %>" class="btn btn-outline-primary">
+            Siguiente
+        </a>
+    </div>
 
     <div class="text-center mt-4">
         <a href="index.jsp" class="btn btn-secondary">Volver al Inicio</a>
