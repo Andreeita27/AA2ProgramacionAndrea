@@ -38,7 +38,7 @@
             <td><%= pelicula.isDisponibleStreaming() ? "Sí" : "No" %></td>
             <td>
                 <!-- TODO: Agregar enlaces para ver detalle, editar o borrar -->
-                <a href="#" class="btn btn-info btn-sm">Ver</a>
+                <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
                 <a href="#" class="btn btn-warning btn-sm">Editar</a>
                 <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
