@@ -20,6 +20,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
+            <th>Imagen</th>
             <th>Título</th>
             <th>Duración (min)</th>
             <th>Fecha de Estreno</th>
@@ -30,17 +31,18 @@
         <tbody>
         <% for (int i = 0; i < ((java.util.List)request.getAttribute("peliculas")).size(); i++) {
             com.svalero.peliculas.model.Peliculas pelicula = (com.svalero.peliculas.model.Peliculas) ((java.util.List)request.getAttribute("peliculas")).get(i); %>
-        <tr>
-            <td><%= pelicula.getTitulo() %></td>
-            <td><%= pelicula.getDuracion() %></td>
-            <td><%= pelicula.getFechaEstreno() %></td>
-            <td><%= pelicula.isDisponibleStreaming() ? "Sí" : "No" %></td>
-            <td>
-                <!-- TODO: Agregar enlaces para ver detalle, editar o borrar -->
-                <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
-                <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-            </td>
+        <td class="align-middle">
+            <img src="images/<%= pelicula.getImagen() %>" width="80" height="100" alt="imagen película">
+        </td>
+        <td class="align-middle"><%= pelicula.getTitulo() %></td>
+        <td class="align-middle"><%= pelicula.getDuracion() %></td>
+        <td class="align-middle"><%= pelicula.getFechaEstreno() %></td>
+        <td class="align-middle"><%= pelicula.isDisponibleStreaming() ? "Sí" : "No" %></td>
+        <td class="align-middle">
+            <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
+            <a href="#" class="btn btn-warning btn-sm">Editar</a>
+            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+        </td>
         </tr>
         <% } %>
         </tbody>
