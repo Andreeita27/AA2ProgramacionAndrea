@@ -5,7 +5,7 @@ import java.sql.Date;
 
 @Data
 public class Usuarios {
-    private String idUsuario;
+    private int idUsuario;
     private String nombre;
     private String email;
     private String contraseña;
@@ -13,11 +13,11 @@ public class Usuarios {
     private Date fechaRegistro;
     private boolean activo;
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
