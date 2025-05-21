@@ -2,6 +2,7 @@ package com.svalero.peliculas.servlet;
 
 import com.svalero.peliculas.dao.UsuariosDao;
 import com.svalero.peliculas.database.Database;
+import com.svalero.peliculas.exception.UsuarioNoEncontradoExcepcion;
 import com.svalero.peliculas.model.Usuarios;
 import com.svalero.peliculas.util.HashUtil;
 
@@ -39,7 +40,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | UsuarioNoEncontradoExcepcion e) {
             e.printStackTrace();
             response.getWriter().println("Error en la base de datos: " + e.getMessage());
         }
