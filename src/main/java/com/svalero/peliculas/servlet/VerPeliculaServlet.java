@@ -26,10 +26,10 @@ public class VerPeliculaServlet extends HttpServlet {
             database.connect();
 
             PeliculasDao peliculasDao = new PeliculasDao(database.getConnection());
-            Peliculas peliculas = peliculasDao.get(id);
+            Peliculas pelicula = peliculasDao.get(id);
 
-            request.setAttribute("pelicula", peliculas);
-            request.getRequestDispatcher("detalle-pelicula.jsp").forward(request, response);
+            request.setAttribute("pelicula", pelicula);
+            request.getRequestDispatcher("ver-pelicula.jsp").forward(request, response);
 
         } catch (PeliculaNoEncontradaExcepcion pnfe) {
             response.getWriter().println("Película no encontrada");
