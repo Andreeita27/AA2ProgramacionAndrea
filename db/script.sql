@@ -115,8 +115,8 @@ INSERT INTO Peliculas (titulo, sinopsis, duracion, fecha_estreno, disponible_str
 VALUES ('Dune', 'Arena, gusanos gigantes, profecías, más arena… y un tío guapo sufriendo en cámara lenta.', 155, '2021-10-22', 0, 'dune.jpg', 9);
 INSERT INTO Peliculas (titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
 VALUES ('Déjame salir', 'Conoces a los suegros y terminas hipnotizado, atrapado y con ganas de salir corriendo, literalmente.', 104, '2017-02-24', 1, 'getout.jpg', 10);
-INSERT INTO Peliculas (id_pelicula, titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
-VALUES (11, 'La lección de piano', 'Una mujer muda llega a Nueva Zelanda con un piano y una hija repelente. Se comunica golpeando teclas y enamora a un tío... sin decir una palabra.', 121, '1993-11-19', 0, 'piano.jpg', 11);
-INSERT INTO Peliculas (id_pelicula, titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
-VALUES (12, 'Jojo Rabbit', 'Un niño nazi tiene como mejor amigo a Hitler... pero versión imaginaria y payasa. Satírica, tierna y más rara que un bocadillo de pepinillos con Nutella.', 108, '2019-10-18', 1, 'jojo.jpg', 12);
+INSERT INTO Peliculas (titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
+VALUES ('La lección de piano', 'Una mujer muda llega a Nueva Zelanda con un piano y una hija repelente. Se comunica golpeando teclas y enamora a un tío... sin decir una palabra.', 121, '1993-11-19', 0, 'piano.jpg', 11);
+INSERT INTO Peliculas (titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
+VALUES ('Jojo Rabbit', 'Un niño nazi tiene como mejor amigo a Hitler... pero versión imaginaria y payasa. Satírica, tierna y más rara que un bocadillo de pepinillos con Nutella.', 108, '2019-10-18', 1, 'jojo.jpg', 12);
 
