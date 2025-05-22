@@ -120,3 +120,7 @@ VALUES ('La lección de piano', 'Una mujer muda llega a Nueva Zelanda con un pia
 INSERT INTO Peliculas (titulo, sinopsis, duracion, fecha_estreno, disponible_streaming, imagen, id_director)
 VALUES ('Jojo Rabbit', 'Un niño nazi tiene como mejor amigo a Hitler... pero versión imaginaria y payasa. Satírica, tierna y más rara que un bocadillo de pepinillos con Nutella.', 108, '2019-10-18', 1, 'jojo.jpg', 12);
 
+INSERT INTO Usuarios (nombre, email, contraseña, rol, fecha_registro, activo)
+VALUES ('admin', 'admin@pelis.com', SHA1('admin'), 'admin', CURDATE(), TRUE);
+INSERT INTO Usuarios (nombre, email, contraseña, rol, fecha_registro, activo)
+VALUES ('user', 'usuario@pelis.com', SHA1('user'), 'usuario', CURDATE(), TRUE);

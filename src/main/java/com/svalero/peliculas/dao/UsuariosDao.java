@@ -23,7 +23,7 @@ public class UsuariosDao {
         statement.setString(2, password);
         ResultSet result = statement.executeQuery();
 
-        if (!result.next()) {
+        if (!result.next()){
             throw new UsuarioNoEncontradoExcepcion();
         }
 
