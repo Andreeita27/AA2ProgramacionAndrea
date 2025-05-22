@@ -18,7 +18,13 @@
 <body class="bg-light">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Listado de Películas</h1>
-
+    <% if ("admin".equals(role)) { %>
+    <div class="mb-4 text-end">
+        <a href="formulario-pelicula.jsp" class="btn btn-success">
+            ➕ Añadir nueva película
+        </a>
+    </div>
+    <% } %>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -33,18 +39,21 @@
         <tbody>
         <% for (int i = 0; i < ((java.util.List)request.getAttribute("peliculas")).size(); i++) {
             com.svalero.peliculas.model.Peliculas pelicula = (com.svalero.peliculas.model.Peliculas) ((java.util.List)request.getAttribute("peliculas")).get(i); %>
-        <td class="align-middle">
-            <img src="images/<%= pelicula.getImagen() %>" width="80" height="100" alt="imagen película">
-        </td>
-        <td class="align-middle"><%= pelicula.getTitulo() %></td>
-        <td class="align-middle"><%= pelicula.getDuracion() %></td>
-        <td class="align-middle"><%= pelicula.getFechaEstreno() %></td>
-        <td class="align-middle"><%= pelicula.isDisponibleStreaming() ? "Sí" : "No" %></td>
-        <td class="align-middle">
-            <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
-            <a href="#" class="btn btn-warning btn-sm">Editar</a>
-            <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
-        </td>
+        <tr>
+            <td class="align-middle">
+                <img src="images/<%= pelicula.getImagen() %>" width="80" height="100" alt="imagen película">
+            </td>
+            <td class="align-middle"><%= pelicula.getTitulo() %></td>
+            <td class="align-middle"><%= pelicula.getDuracion() %></td>
+            <td class="align-middle"><%= pelicula.getFechaEstreno() %></td>
+            <td class="align-middle"><%= pelicula.isDisponibleStreaming() ? "Sí" : "No" %></td>
+            <td class="align-middle">
+                <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
+                <% if ("admin".equals(role)) { %>
+                <a href="editar-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-warning btn-sm">Editar</a>
+                <a href="eliminar-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-danger btn-sm">Eliminar</a>
+                <% } %>
+            </td>
         </tr>
         <% } %>
         </tbody>
@@ -72,3 +81,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

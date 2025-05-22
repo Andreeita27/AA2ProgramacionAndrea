@@ -51,8 +51,9 @@
             <input type="password" class="form-control" id="password" name="password">
         </div>
 
-        <div class="d-grid">
+        <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a href="index.jsp" class="btn btn-secondary">Volver al inicio</a>
         </div>
     </form>
 </div>
