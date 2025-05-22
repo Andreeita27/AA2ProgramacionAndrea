@@ -37,4 +37,26 @@ public class UsuariosDao {
 
         return usuario;
     }
+
+    public void update(Usuarios usuario) throws SQLException {
+        String sql;
+        PreparedStatement statement;
+
+        if (usuario.getContraseña() != null && !usuario.getContraseña().isBlank()) {
+            sql = "UPDATE usuarios SET nombre = ?, email = ?, contraseña = ? WHERE id_usuario = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getEmail());
+            statement.setString(3, usuario.getContraseña());
+            statement.setInt(4, usuario.getIdUsuario());
+        } else {
+            sql = "UPDATE usuarios SET nombre = ?, email = ? WHERE id_usuario = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getEmail());
+            statement.setInt(3, usuario.getIdUsuario());
+        }
+
+        statement.executeUpdate();
+    }
 }
