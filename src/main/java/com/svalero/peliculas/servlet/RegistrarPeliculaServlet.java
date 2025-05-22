@@ -27,6 +27,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/plain");
 
         String titulo = request.getParameter("titulo");
         String sinopsis = request.getParameter("sinopsis");
@@ -52,8 +53,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
         }
 
         if (!errores.isEmpty()) {
-            request.setAttribute("errores", errores);
-            request.getRequestDispatcher("formulario-pelicula.jsp").forward(request, response);
+            response.getWriter().println(String.join("\n", errores));
             return;
         }
 
@@ -69,7 +69,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
             String nombreArchivo = "default.jpg";
             if (imagen != null && imagen.getSize() > 0) {
                 nombreArchivo = UUID.randomUUID() + ".jpg";
-                String ruta = "C:/apache-tomcat-9.0.105/apache-tomcat-9.0.105/webapps/peliculas/images";
+                String ruta = getServletContext().getInitParameter("imagePath");
                 InputStream inputStream = imagen.getInputStream();
                 Files.copy(inputStream, Path.of(ruta + File.separator + nombreArchivo));
             }
@@ -85,7 +85,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
 
             peliculasDao.add(pelicula);
 
-            response.sendRedirect("listar-peliculas");
+            response.getWriter().print("ok");
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -93,4 +93,5 @@ public class RegistrarPeliculaServlet extends HttpServlet {
         }
     }
 }
+
 
