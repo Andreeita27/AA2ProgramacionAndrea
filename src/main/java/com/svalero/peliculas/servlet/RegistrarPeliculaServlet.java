@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @WebServlet("/registrar-pelicula")
@@ -26,17 +28,42 @@ public class RegistrarPeliculaServlet extends HttpServlet {
 
         response.setCharacterEncoding("UTF-8");
 
+        String titulo = request.getParameter("titulo");
+        String sinopsis = request.getParameter("sinopsis");
+        String duracionStr = request.getParameter("duracion");
+        String fechaEstrenoStr = request.getParameter("fechaEstreno");
+        String idDirectorStr = request.getParameter("idDirector");
+        boolean disponibleStreaming = request.getParameter("disponibleStreaming") != null;
+
+        List<String> errores = new ArrayList<>();
+
+        if (titulo == null || titulo.trim().isEmpty()) {
+            errores.add("El título no puede estar vacío");
+        }
+
+        int duracion = 0;
+        try {
+            duracion = Integer.parseInt(duracionStr);
+            if (duracion <= 0) {
+                errores.add("La duración debe ser mayor que 0");
+            }
+        } catch (NumberFormatException e) {
+            errores.add("La duración debe ser un número válido");
+        }
+
+        if (!errores.isEmpty()) {
+            request.setAttribute("errores", errores);
+            request.getRequestDispatcher("formulario-pelicula.jsp").forward(request, response);
+            return;
+        }
+
         try {
             Database database = new Database();
             database.connect();
             PeliculasDao peliculasDao = new PeliculasDao(database.getConnection());
 
-            String titulo = request.getParameter("titulo");
-            String sinopsis = request.getParameter("sinopsis");
-            int duracion = Integer.parseInt(request.getParameter("duracion"));
-            Date fechaEstreno = Date.valueOf(request.getParameter("fechaEstreno"));
-            int idDirector = Integer.parseInt(request.getParameter("idDirector"));
-            boolean disponibleStreaming = request.getParameter("disponibleStreaming") != null;
+            Date fechaEstreno = Date.valueOf(fechaEstrenoStr);
+            int idDirector = Integer.parseInt(idDirectorStr);
 
             Part imagen = request.getPart("imagen");
             String nombreArchivo = "default.jpg";
@@ -58,7 +85,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
 
             peliculasDao.add(pelicula);
 
-            response.sendRedirect("listar-peliculas.jsp");
+            response.sendRedirect("listar-peliculas");
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -66,3 +93,4 @@ public class RegistrarPeliculaServlet extends HttpServlet {
         }
     }
 }
+
