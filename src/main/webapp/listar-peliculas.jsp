@@ -18,7 +18,11 @@
 <body class="bg-light">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Listado de Películas</h1>
-
+    <% if ("admin".equals(session.getAttribute("role"))) { %>
+    <div class="text-end mb-3">
+        <a href="formulario-pelicula.jsp" class="btn btn-success">Añadir Película</a>
+    </div>
+    <% } %>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>

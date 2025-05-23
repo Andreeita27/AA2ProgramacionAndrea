@@ -7,17 +7,16 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+  String role = (String) session.getAttribute("role");
   String nombreUsuario = (session.getAttribute("usuario") != null)
           ? ((com.svalero.peliculas.model.Usuarios) session.getAttribute("usuario")).getNombre()
           : null;
 %>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.jsp">🎬 Películas</a>
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
-
         <% if (role == null) { %>
         <li class="nav-item">
           <a class="nav-link" href="login.jsp">Iniciar sesión</a>
@@ -33,9 +32,9 @@
           <a class="nav-link" href="logout">Cerrar sesión</a>
         </li>
         <% } %>
-
       </ul>
     </div>
   </div>
 </nav>
+
 
