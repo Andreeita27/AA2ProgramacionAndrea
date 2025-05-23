@@ -1,5 +1,6 @@
 package com.svalero.peliculas.dao;
 
+import com.svalero.peliculas.exception.DirectorNoEncontradoExcepcion;
 import com.svalero.peliculas.model.Directores;
 
 import java.sql.Connection;
