@@ -21,14 +21,15 @@ public class DirectoresDao {
     }
 
     public boolean add(Directores director) throws SQLException {
-        String sql = "INSERT INTO directores (nombre, nacionalidad, fecha_nacimiento, retirado, imagen) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO directores (nombre, nacionalidad, fecha_nacimiento, numero_peliculas, retirado, imagen) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, director.getNombre());
         statement.setString(2, director.getNacionalidad());
         statement.setDate(3, director.getFechaNacimiento());
-        statement.setBoolean(4, director.isRetirado());
-        statement.setString(5, director.getImagen());
+        statement.setInt(4, director.getNPeliculas());
+        statement.setBoolean(5, director.isRetirado());
+        statement.setString(6, director.getImagen());
 
         int affectedRows = statement.executeUpdate();
         statement.close();
@@ -49,6 +50,7 @@ public class DirectoresDao {
             director.setNombre(resultSet.getString("nombre"));
             director.setNacionalidad(resultSet.getString("nacionalidad"));
             director.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
+            director.setNPeliculas(resultSet.getInt("numero_peliculas"));
             director.setRetirado(resultSet.getBoolean("retirado"));
             director.setImagen(resultSet.getString("imagen"));
             directores.add(director);
@@ -74,6 +76,7 @@ public class DirectoresDao {
         director.setNombre(result.getString("nombre"));
         director.setNacionalidad(result.getString("nacionalidad"));
         director.setFechaNacimiento(result.getDate("fecha_nacimiento"));
+        director.setNPeliculas(result.getInt("numero_peliculas"));
         director.setRetirado(result.getBoolean("retirado"));
         director.setImagen(result.getString("imagen"));
 
@@ -81,14 +84,15 @@ public class DirectoresDao {
     }
 
     public boolean modify(Directores director) throws SQLException {
-        String sql = "UPDATE directores SET nombre = ?, nacionalidad = ?, fecha_nacimiento = ?, retirado = ?, imagen = ? WHERE id_director = ?";
+        String sql = "UPDATE directores SET nombre = ?, nacionalidad = ?, fecha_nacimiento = ?, numero_peliculas = ?, retirado = ?, imagen = ? WHERE id_director = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, director.getNombre());
         statement.setString(2, director.getNacionalidad());
         statement.setDate(3, director.getFechaNacimiento());
-        statement.setBoolean(4, director.isRetirado());
-        statement.setString(5, director.getImagen());
-        statement.setInt(6, director.getIdDirector());
+        statement.setInt(4, director.getNPeliculas());
+        statement.setBoolean(5, director.isRetirado());
+        statement.setString(6, director.getImagen());
+        statement.setInt(7, director.getIdDirector());
 
         int affectedRows = statement.executeUpdate();
         statement.close();
@@ -96,5 +100,13 @@ public class DirectoresDao {
         return affectedRows != 0;
     }
 
+    public boolean delete(int idDirector) throws SQLException {
+        String sql = "DELETE FROM directores WHERE id_director = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, idDirector);
+        int affectedRows = statement.executeUpdate();
+        statement.close();
+        return affectedRows != 0;
+    }
 
 }

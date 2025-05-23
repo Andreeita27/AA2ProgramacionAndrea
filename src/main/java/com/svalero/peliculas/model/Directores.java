@@ -9,6 +9,7 @@ public class Directores {
     private String nombre;
     private String nacionalidad;
     private Date fechaNacimiento;
+    private int nPeliculas;
     private boolean retirado;
     private String imagen;
 

@@ -67,6 +67,11 @@
             <input type="hidden" name="imagenActual" value="<%= director.getImagen() %>">
             <% } %>
         </div>
+        <div class="col-md-6">
+            <label for="nPeliculas" class="form-label">Número de películas dirigidas</label>
+            <input type="number" class="form-control" id="nPeliculas" name="nPeliculas" min="0"
+                   value="<%= director != null ? director.getNPeliculas() : "" %>" required>
+        </div>
 
         <% if (director != null) { %>
         <input type="hidden" name="idDirector" value="<%= director.getIdDirector() %>">

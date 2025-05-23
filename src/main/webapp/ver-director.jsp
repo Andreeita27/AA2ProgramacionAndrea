@@ -30,6 +30,7 @@
                 <h2 class="mb-3"><%= ((com.svalero.peliculas.model.Directores)request.getAttribute("director")).getNombre() %></h2>
                 <p><strong>Nacionalidad:</strong> <%= ((com.svalero.peliculas.model.Directores)request.getAttribute("director")).getNacionalidad() %></p>
                 <p><strong>Fecha de nacimiento:</strong> <%= ((com.svalero.peliculas.model.Directores)request.getAttribute("director")).getFechaNacimiento() %></p>
+                <p><strong>Número de películas dirigidas:</strong> <%= ((com.svalero.peliculas.model.Directores)request.getAttribute("director")).getNPeliculas() %></p>
                 <p><strong>Retirado:</strong> <%= ((com.svalero.peliculas.model.Directores)request.getAttribute("director")).isRetirado() ? "Sí" : "No" %></p>
             </div>
         </div>
