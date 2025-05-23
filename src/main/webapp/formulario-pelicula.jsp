@@ -18,6 +18,7 @@
   if (action == null) {
     action = "Registrar";
   }
+  String formAction = action.equals("Modificar") ? "editar-pelicula" : "registrar-pelicula";
 %>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
 <div class="container mt-5">
   <h1 class="text-center mb-4"><%= action %> Película</h1>
 
-  <form id="pelicula-form" class="row g-3" enctype="multipart/form-data">
+  <form id="pelicula-form" action="<%= formAction %>" method="post" class="row g-3" enctype="multipart/form-data">
     <div class="col-md-6">
       <label for="titulo" class="form-label">Título</label>
       <input type="text" class="form-control" id="titulo" name="titulo"
@@ -65,6 +66,9 @@
     <div class="col-md-6">
       <label for="imagen" class="form-label">Imagen</label>
       <input class="form-control" type="file" id="imagen" name="imagen" accept="image/*">
+      <% if (pelicula != null) { %>
+      <input type="hidden" name="imagenActual" value="<%= pelicula.getImagen() %>">
+      <% } %>
     </div>
 
     <div class="col-md-6">
@@ -76,12 +80,9 @@
       </div>
     </div>
 
-    <div class="col-12">
-      <input type="hidden" name="action" value="<%= action %>">
-      <% if (pelicula != null) { %>
-      <input type="hidden" name="idPelicula" value="<%= pelicula.getIdPelicula() %>">
-      <% } %>
-    </div>
+    <% if (pelicula != null) { %>
+    <input type="hidden" name="idPelicula" value="<%= pelicula.getIdPelicula() %>">
+    <% } %>
 
     <div class="col-12 d-grid gap-2">
       <button type="submit" class="btn btn-primary"><%= action %></button>
@@ -93,36 +94,39 @@
 </div>
 
 <script>
+  const action = "<%= action %>";
   $(document).ready(function () {
-    $("#pelicula-form").on("submit", function (event) {
-      event.preventDefault();
-      const form = $("#pelicula-form")[0];
-      const formData = new FormData(form);
+    if (action === "Registrar") {
+      $("#pelicula-form").on("submit", function (event) {
+        event.preventDefault();
+        const form = $("#pelicula-form")[0];
+        const formData = new FormData(form);
 
-      $.ajax({
-        url: "registrar-pelicula",
-        type: "POST",
-        enctype: "multipart/form-data",
-        data: formData,
-        processData: false,
-        contentType: false,
-        cache: false,
-        timeout: 10000,
-        statusCode: {
-          200: function (response) {
-            if (response === "ok") {
-              $("#result").html("<div class='alert alert-success'>Película procesada correctamente</div>");
-              if ("<%= action %>" === "Registrar") form.reset();
-            } else {
-              $("#result").html("<div class='alert alert-danger'>" + response + "</div>");
+        $.ajax({
+          url: "registrar-pelicula",
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 10000,
+          statusCode: {
+            200: function (response) {
+              if (response === "ok") {
+                $("#result").html("<div class='alert alert-success'>Película registrada correctamente</div>");
+                form.reset();
+              } else {
+                $("#result").html("<div class='alert alert-danger'>" + response + "</div>");
+              }
+            },
+            500: function () {
+              $("#result").html("<div class='alert alert-danger'>Error en el servidor</div>");
             }
-          },
-          500: function () {
-            $("#result").html("<div class='alert alert-danger'>Error en el servidor</div>");
           }
-        }
+        });
       });
-    });
+    }
   });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
