@@ -80,4 +80,21 @@ public class DirectoresDao {
         return director;
     }
 
+    public boolean modify(Directores director) throws SQLException {
+        String sql = "UPDATE directores SET nombre = ?, nacionalidad = ?, fecha_nacimiento = ?, retirado = ?, imagen = ? WHERE id_director = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, director.getNombre());
+        statement.setString(2, director.getNacionalidad());
+        statement.setDate(3, director.getFechaNacimiento());
+        statement.setBoolean(4, director.isRetirado());
+        statement.setString(5, director.getImagen());
+        statement.setInt(6, director.getIdDirector());
+
+        int affectedRows = statement.executeUpdate();
+        statement.close();
+
+        return affectedRows != 0;
+    }
+
+
 }
