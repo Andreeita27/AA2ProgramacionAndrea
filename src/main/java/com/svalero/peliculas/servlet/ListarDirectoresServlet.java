@@ -18,13 +18,19 @@ public class ListarDirectoresServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
 
+        int page = 0;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
         try {
             Database database = new Database();
             database.connect();
             DirectoresDao directoresDao = new DirectoresDao(database.getConnection());
 
-            List<Directores> directores = directoresDao.getAll();
+            List<Directores> directores = directoresDao.getAll(page);
             request.setAttribute("directores", directores);
+            request.setAttribute("currentPage", page);
             request.getRequestDispatcher("listar-directores.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {

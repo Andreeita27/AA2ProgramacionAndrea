@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-  String role = (String) session.getAttribute("role");
   String nombreUsuario = (session.getAttribute("usuario") != null)
           ? ((com.svalero.peliculas.model.Usuarios) session.getAttribute("usuario")).getNombre()
           : null;

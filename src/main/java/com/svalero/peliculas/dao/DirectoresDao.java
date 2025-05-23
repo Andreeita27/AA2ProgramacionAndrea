@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.svalero.peliculas.util.Constant.PAGE_SIZE;
+
 public class DirectoresDao {
 
     private final Connection connection;
@@ -32,10 +34,12 @@ public class DirectoresDao {
         return affectedRows != 0;
     }
 
-    public List<Directores> getAll() throws SQLException {
+    public List<Directores> getAll(int page) throws SQLException {
         List<Directores> directores = new ArrayList<>();
-        String sql = "SELECT * FROM directores ORDER BY nombre";
+        String sql = "SELECT * FROM directores ORDER BY nombre LIMIT ?, ?";
         PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, page * PAGE_SIZE);
+        statement.setInt(2, PAGE_SIZE);
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
