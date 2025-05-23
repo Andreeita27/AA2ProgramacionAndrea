@@ -57,4 +57,26 @@ public class DirectoresDao {
         statement.close();
         return directores;
     }
+
+    public Directores get(int id) throws SQLException, DirectorNoEncontradoExcepcion {
+        String sql = "SELECT * FROM directores WHERE id_director = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+
+        if (!result.next()) {
+            throw new DirectorNoEncontradoExcepcion();
+        }
+
+        Directores director = new Directores();
+        director.setIdDirector(result.getInt("id_director"));
+        director.setNombre(result.getString("nombre"));
+        director.setNacionalidad(result.getString("nacionalidad"));
+        director.setFechaNacimiento(result.getDate("fecha_nacimiento"));
+        director.setRetirado(result.getBoolean("retirado"));
+        director.setImagen(result.getString("imagen"));
+
+        return director;
+    }
+
 }
