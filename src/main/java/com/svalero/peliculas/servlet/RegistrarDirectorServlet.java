@@ -44,6 +44,7 @@ public class RegistrarDirectorServlet extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String nacionalidad = request.getParameter("nacionalidad");
             Date fechaNacimiento = Date.valueOf(request.getParameter("fechaNacimiento"));
+            int nPeliculas = Integer.parseInt(request.getParameter("nPeliculas"));
             boolean retirado = request.getParameter("retirado") != null;
 
             Part imagen = request.getPart("imagen");
@@ -59,6 +60,7 @@ public class RegistrarDirectorServlet extends HttpServlet {
             director.setNombre(nombre);
             director.setNacionalidad(nacionalidad);
             director.setFechaNacimiento(fechaNacimiento);
+            director.setNPeliculas(nPeliculas);
             director.setRetirado(retirado);
             director.setImagen(nombreArchivo);
 
