@@ -18,6 +18,7 @@
 <body class="bg-light">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Listado de Películas</h1>
+
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -44,7 +45,8 @@
                 <a href="ver-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-info btn-sm">Ver</a>
                 <% if ("admin".equals(session.getAttribute("role"))) { %>
                 <a href="editar-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-warning btn-sm">Editar</a>
-                <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                <a href="eliminar-pelicula?id=<%= pelicula.getIdPelicula() %>" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Estás segura de que quieres eliminar esta película?')">Eliminar</a>
                 <% } %>
             </td>
         </tr>
