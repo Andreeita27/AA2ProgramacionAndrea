@@ -1,9 +1,12 @@
 package com.svalero.peliculas.servlet;
 
 import com.svalero.peliculas.dao.PeliculasDao;
+import com.svalero.peliculas.dao.DirectoresDao;
 import com.svalero.peliculas.database.Database;
 import com.svalero.peliculas.exception.PeliculaNoEncontradaExcepcion;
+import com.svalero.peliculas.exception.DirectorNoEncontradoExcepcion;
 import com.svalero.peliculas.model.Peliculas;
+import com.svalero.peliculas.model.Directores;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,8 +30,19 @@ public class VerPeliculaServlet extends HttpServlet {
 
             PeliculasDao peliculasDao = new PeliculasDao(database.getConnection());
             Peliculas pelicula = peliculasDao.get(id);
-
             request.setAttribute("pelicula", pelicula);
+
+            DirectoresDao directoresDao = new DirectoresDao(database.getConnection());
+            String nombreDirector;
+            try {
+                Directores director = directoresDao.get(pelicula.getIdDirector());
+                nombreDirector = director.getNombre();
+            } catch (DirectorNoEncontradoExcepcion e) {
+                nombreDirector = "Desconocido";
+            }
+
+            request.setAttribute("nombreDirector", nombreDirector);
+
             request.getRequestDispatcher("ver-pelicula.jsp").forward(request, response);
 
         } catch (PeliculaNoEncontradaExcepcion pnfe) {

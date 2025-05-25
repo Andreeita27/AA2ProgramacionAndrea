@@ -37,13 +37,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="fechaRegistro" class="form-label">Fecha de registro</label>
-            <input type="text" class="form-control" id="fechaRegistro" name="fechaRegistro" value="<%= usuario.getFechaRegistro() %>" readonly>
+            <p class="form-control-plaintext"><strong>Fecha de registro:</strong> <%= usuario.getFechaRegistro() %></p>
         </div>
 
         <div class="mb-3">
-            <label for="rol" class="form-label">Rol</label>
-            <input type="text" class="form-control" id="rol" name="rol" value="<%= usuario.getRol() %>" readonly>
+            <p class="form-control-plaintext"><strong>Rol:</strong> <%= usuario.getRol() %></p>
         </div>
 
         <div class="mb-3">
