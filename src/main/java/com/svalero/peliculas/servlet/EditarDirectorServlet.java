@@ -61,6 +61,7 @@ public class EditarDirectorServlet extends HttpServlet {
             String nombre = request.getParameter("nombre");
             String nacionalidad = request.getParameter("nacionalidad");
             Date fechaNacimiento = Date.valueOf(request.getParameter("fechaNacimiento"));
+            int nPeliculas = Integer.parseInt(request.getParameter("nPeliculas"));
             boolean retirado = request.getParameter("retirado") != null;
 
             String nombreArchivo = request.getParameter("imagenActual");
@@ -77,6 +78,7 @@ public class EditarDirectorServlet extends HttpServlet {
             director.setNombre(nombre);
             director.setNacionalidad(nacionalidad);
             director.setFechaNacimiento(fechaNacimiento);
+            director.setNPeliculas(nPeliculas);
             director.setRetirado(retirado);
             director.setImagen(nombreArchivo);
 
