@@ -74,4 +74,13 @@ public class UsuariosDao {
 
         return affectedRows != 0;
     }
+
+    public boolean delete(int idUsuario) throws SQLException {
+        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, idUsuario);
+        int affectedRows = statement.executeUpdate();
+        statement.close();
+        return affectedRows != 0;
+    }
 }

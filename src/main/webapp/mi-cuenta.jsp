@@ -54,6 +54,11 @@
             <a href="index.jsp" class="btn btn-secondary">Volver al inicio</a>
         </div>
     </form>
+    <form action="eliminar-usuario" method="post" onsubmit="return confirm('¿Estás segura de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.');">
+        <div class="d-grid mt-2">
+            <button type="submit" class="btn btn-danger">Eliminar mi cuenta</button>
+        </div>
+    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
