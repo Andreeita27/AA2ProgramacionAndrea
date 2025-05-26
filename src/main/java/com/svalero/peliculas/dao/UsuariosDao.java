@@ -59,4 +59,18 @@ public class UsuariosDao {
 
         statement.executeUpdate();
     }
+
+    public boolean add(Usuarios usuario) throws SQLException {
+        String sql = "INSERT INTO usuarios (nombre, email, contraseña, rol, fecha_registro, activo) " +
+                "VALUES (?, ?, SHA1(?), 'usuario', CURRENT_DATE, TRUE)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, usuario.getNombre());
+        statement.setString(2, usuario.getEmail());
+        statement.setString(3, usuario.getContraseña());
+
+        int affectedRows = statement.executeUpdate();
+        statement.close();
+
+        return affectedRows != 0;
+    }
 }
