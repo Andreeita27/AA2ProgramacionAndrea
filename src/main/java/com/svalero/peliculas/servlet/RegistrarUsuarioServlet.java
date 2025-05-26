@@ -30,7 +30,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
             Usuarios nuevoUsuario = new Usuarios();
             nuevoUsuario.setNombre(nombre);
             nuevoUsuario.setEmail(email);
-            nuevoUsuario.setContraseña(HashUtil.sha1(password));
+            nuevoUsuario.setContraseña(password);
 
             boolean registrado = usuariosDao.add(nuevoUsuario);
 
@@ -38,13 +38,13 @@ public class RegistrarUsuarioServlet extends HttpServlet {
                 response.sendRedirect("login.jsp");
             } else {
                 request.setAttribute("error", "No se pudo registrar el usuario");
-                request.getRequestDispatcher("registro.jsp").forward(request, response);
+                request.getRequestDispatcher("formulario-usuario.jsp").forward(request, response);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             request.setAttribute("error", "Error en la base de datos: " + e.getMessage());
-            request.getRequestDispatcher("registro.jsp").forward(request, response);
+            request.getRequestDispatcher("formulario-usuario.jsp").forward(request, response);
         }
     }
 }

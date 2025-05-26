@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("email").trim().toLowerCase(); // Normalizamos por seguridad
+        String email = request.getParameter("email").trim().toLowerCase();
         String password = request.getParameter("password");
 
         try {
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             String hashedPassword = HashUtil.sha1(password);
 
             try {
-                Usuarios usuario = usuariosDao.getUsuarioByEmailAndPassword(email, password);
+                Usuarios usuario = usuariosDao.getUsuarioByEmailAndPassword(email, hashedPassword);
 
                 HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", usuario);
