@@ -2,6 +2,7 @@ package com.svalero.peliculas.dao;
 
 import com.svalero.peliculas.model.Usuarios;
 import com.svalero.peliculas.exception.UsuarioNoEncontradoExcepcion;
+import com.svalero.peliculas.util.HashUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class UsuariosDao {
     }
 
     public Usuarios getUsuarioByEmailAndPassword(String email, String password) throws SQLException, UsuarioNoEncontradoExcepcion {
-        String sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = SHA1(?)";
+        String sql = "SELECT * FROM usuarios WHERE email = ? AND contraseña = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, email);
         statement.setString(2, password);
@@ -47,7 +48,7 @@ public class UsuariosDao {
             statement = connection.prepareStatement(sql);
             statement.setString(1, usuario.getNombre());
             statement.setString(2, usuario.getEmail());
-            statement.setString(3, usuario.getContraseña());
+            statement.setString(3, HashUtil.sha1(usuario.getContraseña()));
             statement.setInt(4, usuario.getIdUsuario());
         } else {
             sql = "UPDATE usuarios SET nombre = ?, email = ? WHERE id_usuario = ?";
@@ -62,11 +63,11 @@ public class UsuariosDao {
 
     public boolean add(Usuarios usuario) throws SQLException {
         String sql = "INSERT INTO usuarios (nombre, email, contraseña, rol, fecha_registro, activo) " +
-                "VALUES (?, ?, SHA1(?), 'usuario', CURRENT_DATE, TRUE)";
+                "VALUES (?, ?, ?, 'usuario', CURRENT_DATE, TRUE)";
         PreparedStatement statement = connection.prepareStatement(sql);
         statement.setString(1, usuario.getNombre());
         statement.setString(2, usuario.getEmail());
-        statement.setString(3, usuario.getContraseña());
+        statement.setString(3, HashUtil.sha1(usuario.getContraseña()));
 
         int affectedRows = statement.executeUpdate();
         statement.close();

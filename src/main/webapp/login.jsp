@@ -43,6 +43,9 @@
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </div>
                 </form>
+                <div class="text-center mt-3">
+                    <p>¿Aún no tienes cuenta? <a href="formulario-usuario.jsp">Regístrate aquí</a></p>
+                </div>
             </div>
         </div>
     </div>
