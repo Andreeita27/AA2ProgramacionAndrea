@@ -12,17 +12,34 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Listado de Peliculas</title>
+    <title>Listado de Películas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Listado de Películas</h1>
+
+    <form action="listar-peliculas" method="get" class="row g-3 mb-4">
+        <div class="col-md-6">
+            <input type="text" class="form-control" name="titulo" placeholder="Buscar por título"
+                   value="<%= request.getAttribute("titulo") != null ? request.getAttribute("titulo") : "" %>">
+        </div>
+        <div class="col-md-4 form-check">
+            <input type="checkbox" class="form-check-input" id="streaming" name="streaming" value="true"
+                <%= "true".equals(request.getAttribute("streaming")) ? "checked" : "" %>>
+            <label class="form-check-label" for="streaming">Solo disponibles en streaming</label>
+        </div>
+        <div class="col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </div>
+    </form>
+
     <% if ("admin".equals(session.getAttribute("role"))) { %>
     <div class="text-end mb-3">
         <a href="formulario-pelicula.jsp" class="btn btn-success">Añadir Película</a>
     </div>
     <% } %>
+
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -57,18 +74,22 @@
         <% } %>
         </tbody>
     </table>
+
     <%
         int currentPage = (request.getAttribute("currentPage") != null) ?
                 (Integer) request.getAttribute("currentPage") : 0;
+        String titulo = request.getAttribute("titulo") != null ? (String) request.getAttribute("titulo") : "";
+        String streaming = request.getAttribute("streaming") != null ? (String) request.getAttribute("streaming") : "";
+        String extraParams = "&titulo=" + titulo + "&streaming=" + streaming;
     %>
 
     <div class="text-center mt-4">
-        <a href="listar-peliculas?page=<%= currentPage - 1 %>" class="btn btn-outline-primary me-2"
+        <a href="listar-peliculas?page=<%= currentPage - 1 %><%= extraParams %>" class="btn btn-outline-primary me-2"
                 <%= (currentPage <= 0) ? "style='pointer-events:none;opacity:0.5;'" : "" %>>
             Anterior
         </a>
 
-        <a href="listar-peliculas?page=<%= currentPage + 1 %>" class="btn btn-outline-primary">
+        <a href="listar-peliculas?page=<%= currentPage + 1 %><%= extraParams %>" class="btn btn-outline-primary">
             Siguiente
         </a>
     </div>
@@ -80,5 +101,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
 

@@ -11,14 +11,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 @WebServlet("/listar-peliculas")
 public class ListarPeliculasServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
 
-        String search = request.getParameter("busqueda");
         int page = 0;
         if (request.getParameter("page") != null) {
             try {
@@ -28,28 +26,26 @@ public class ListarPeliculasServlet extends HttpServlet {
             }
         }
 
+        String titulo = request.getParameter("titulo");
+        String streaming = request.getParameter("streaming");
+
         try {
             Database database = new Database();
             database.connect();
 
             PeliculasDao peliculaDao = new PeliculasDao(database.getConnection());
-            ArrayList<Peliculas> peliculas = peliculaDao.getAll(page, search);
+            ArrayList<Peliculas> peliculas = peliculaDao.getAll(page, titulo, streaming);
 
             request.setAttribute("peliculas", peliculas);
             request.setAttribute("currentPage", page);
-            request.setAttribute("search", search);
+            request.setAttribute("titulo", titulo);
+            request.setAttribute("streaming", streaming);
 
             request.getRequestDispatcher("listar-peliculas.jsp").forward(request, response);
 
-        } catch (SQLException sqle) {
-            response.getWriter().println("Error al acceder a la base de datos");
-            sqle.printStackTrace();
-        } catch (ClassNotFoundException cnfe) {
-            response.getWriter().println("No se ha podido cargar el driver de la base de datos");
-            cnfe.printStackTrace();
-        } catch (Exception e) {
-            response.getWriter().println("Error inesperado: " + e.getMessage());
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            response.getWriter().println("Error al acceder a la base de datos: " + e.getMessage());
         }
     }
 }
