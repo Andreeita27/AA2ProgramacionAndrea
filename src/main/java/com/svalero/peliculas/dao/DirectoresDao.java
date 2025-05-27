@@ -36,23 +36,41 @@ public class DirectoresDao {
         return affectedRows != 0;
     }
 
-    public List<Directores> getAll(int page) throws SQLException {
+    public List<Directores> getAll(int page, String nombre, String retirado) throws SQLException {
         List<Directores> directores = new ArrayList<>();
-        String sql = "SELECT * FROM directores ORDER BY nombre LIMIT ?, ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, page * PAGE_SIZE);
-        statement.setInt(2, PAGE_SIZE);
-        ResultSet resultSet = statement.executeQuery();
+        String sql = "SELECT * FROM directores WHERE 1=1";
 
+        if (nombre != null && !nombre.isEmpty()) {
+            sql += " AND nombre LIKE ?";
+        }
+        if (retirado != null && !retirado.isEmpty()) {
+            sql += " AND retirado = ?";
+        }
+
+        sql += " ORDER BY nombre LIMIT ?, ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        int paramIndex = 1;
+        if (nombre != null && !nombre.isEmpty()) {
+            statement.setString(paramIndex++, "%" + nombre + "%");
+        }
+        if (retirado != null && !retirado.isEmpty()) {
+            statement.setBoolean(paramIndex++, Boolean.parseBoolean(retirado));
+        }
+
+        statement.setInt(paramIndex++, (page - 1) * PAGE_SIZE);
+        statement.setInt(paramIndex, PAGE_SIZE);
+
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Directores director = new Directores();
-            director.setIdDirector(resultSet.getInt("id_director"));
-            director.setNombre(resultSet.getString("nombre"));
-            director.setNacionalidad(resultSet.getString("nacionalidad"));
-            director.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
-            director.setNPeliculas(resultSet.getInt("numero_peliculas"));
-            director.setRetirado(resultSet.getBoolean("retirado"));
-            director.setImagen(resultSet.getString("imagen"));
+                director.setIdDirector(resultSet.getInt("id_director"));
+                director.setNombre(resultSet.getString("nombre"));
+                director.setNacionalidad(resultSet.getString("nacionalidad"));
+                director.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
+                director.setNPeliculas(resultSet.getInt("numero_peliculas"));
+                director.setRetirado(resultSet.getBoolean("retirado"));
+                director.setImagen(resultSet.getString("imagen"));
             directores.add(director);
         }
 
@@ -60,6 +78,7 @@ public class DirectoresDao {
         statement.close();
         return directores;
     }
+
 
     public Directores get(int id) throws SQLException, DirectorNoEncontradoExcepcion {
         String sql = "SELECT * FROM directores WHERE id_director = ?";
