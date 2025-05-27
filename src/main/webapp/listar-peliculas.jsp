@@ -20,17 +20,25 @@
     <h1 class="text-center mb-4">Listado de Películas</h1>
 
     <form action="listar-peliculas" method="get" class="row g-3 mb-4">
-        <div class="col-md-6">
-            <input type="text" class="form-control" name="titulo" placeholder="Buscar por título"
+        <div class="col-md-5">
+            <input type="text" name="titulo" class="form-control" placeholder="Buscar por título"
                    value="<%= request.getAttribute("titulo") != null ? request.getAttribute("titulo") : "" %>">
         </div>
-        <div class="col-md-4 form-check">
-            <input type="checkbox" class="form-check-input" id="streaming" name="streaming" value="true"
-                <%= "true".equals(request.getAttribute("streaming")) ? "checked" : "" %>>
-            <label class="form-check-label" for="streaming">Solo disponibles en streaming</label>
+
+        <div class="col-md-3">
+            <select name="streaming" class="form-select">
+                <option value="">Todas</option>
+                <option value="true" <%= "true".equals(request.getAttribute("streaming")) ? "selected" : "" %>>Sí</option>
+                <option value="false" <%= "false".equals(request.getAttribute("streaming")) ? "selected" : "" %>>No</option>
+            </select>
         </div>
-        <div class="col-md-2 d-grid">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+        </div>
+
+        <div class="col-md-2">
+            <a href="listar-peliculas" class="btn btn-secondary w-100">Limpiar</a>
         </div>
     </form>
 
