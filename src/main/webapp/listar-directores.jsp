@@ -19,6 +19,29 @@
 <div class="container mt-5">
     <h1 class="text-center mb-4">Listado de Directores</h1>
 
+    <form method="get" action="listar-directores" class="row g-3 mb-4">
+        <div class="col-md-5">
+            <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre"
+                   value="<%= request.getAttribute("nombre") != null ? request.getAttribute("nombre") : "" %>">
+        </div>
+
+        <div class="col-md-3">
+            <select name="retirado" class="form-select">
+                <option value="">Todos</option>
+                <option value="true" <%= "true".equals(request.getAttribute("retirado")) ? "selected" : "" %>>Sí</option>
+                <option value="false" <%= "false".equals(request.getAttribute("retirado")) ? "selected" : "" %>>No</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Buscar</button>
+        </div>
+
+        <div class="col-md-2">
+            <a href="listar-directores" class="btn btn-secondary w-100">Limpiar</a>
+        </div>
+    </form>
+
     <% if ("admin".equals(session.getAttribute("role"))) { %>
     <div class="text-end mb-3">
         <a href="formulario-director.jsp" class="btn btn-success">Añadir Director</a>
