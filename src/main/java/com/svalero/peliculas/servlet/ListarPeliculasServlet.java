@@ -5,6 +5,7 @@ import com.svalero.peliculas.model.Peliculas;
 import com.svalero.peliculas.database.Database;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet("/listar-peliculas")
+@MultipartConfig
 public class ListarPeliculasServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

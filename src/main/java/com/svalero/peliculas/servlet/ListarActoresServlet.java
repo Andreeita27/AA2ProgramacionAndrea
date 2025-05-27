@@ -5,6 +5,7 @@ import com.svalero.peliculas.database.Database;
 import com.svalero.peliculas.model.Actores;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/listar-actores")
+@MultipartConfig
 public class ListarActoresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

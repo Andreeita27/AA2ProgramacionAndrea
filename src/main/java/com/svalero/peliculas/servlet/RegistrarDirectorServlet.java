@@ -46,15 +46,7 @@ public class RegistrarDirectorServlet extends HttpServlet {
             Date fechaNacimiento = Date.valueOf(request.getParameter("fechaNacimiento"));
             int nPeliculas = Integer.parseInt(request.getParameter("nPeliculas"));
             boolean retirado = request.getParameter("retirado") != null;
-
             Part imagen = request.getPart("imagen");
-            String nombreArchivo = "default.jpg";
-            if (imagen != null && imagen.getSize() > 0) {
-                nombreArchivo = UUID.randomUUID() + ".jpg";
-                String ruta = getServletContext().getInitParameter("imagePath");
-                InputStream inputStream = imagen.getInputStream();
-                Files.copy(inputStream, Path.of(ruta + File.separator + nombreArchivo));
-            }
 
             Directores director = new Directores();
             director.setNombre(nombre);
@@ -62,7 +54,15 @@ public class RegistrarDirectorServlet extends HttpServlet {
             director.setFechaNacimiento(fechaNacimiento);
             director.setNPeliculas(nPeliculas);
             director.setRetirado(retirado);
-            director.setImagen(nombreArchivo);
+
+            String filename = "default2.jpg";
+            if (imagen.getSize() != 0) {
+                filename =  UUID.randomUUID() + ".jpg";
+                String imagePath = "C:/apache-tomcat-9.0.105/apache-tomcat-9.0.105/webapps/images";
+                InputStream inputStream = imagen.getInputStream();
+                Files.copy(inputStream, Path.of(imagePath + File.separator + filename));
+            }
+            director.setImagen(filename);
 
             Database database = new Database();
             database.connect();

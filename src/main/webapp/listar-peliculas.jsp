@@ -64,7 +64,7 @@
             com.svalero.peliculas.model.Peliculas pelicula = (com.svalero.peliculas.model.Peliculas) ((java.util.List)request.getAttribute("peliculas")).get(i); %>
         <tr>
             <td class="align-middle">
-                <img src="images/<%= pelicula.getImagen() %>" width="80" height="100" alt="imagen película">
+                <img src="../images/<%= pelicula.getImagen() %>" width="80" height="100" alt="imagen película">
             </td>
             <td class="align-middle"><%= pelicula.getTitulo() %></td>
             <td class="align-middle"><%= pelicula.getDuracion() %></td>
