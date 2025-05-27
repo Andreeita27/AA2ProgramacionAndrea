@@ -12,6 +12,24 @@
           ? ((com.svalero.peliculas.model.Usuarios) session.getAttribute("usuario")).getNombre()
           : null;
 %>
+
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  .page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.jsp">FlixNet</a>
