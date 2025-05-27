@@ -22,6 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+<div class="page-wrapper">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Zona privada - Mi cuenta</h1>
 
@@ -62,5 +63,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<%@ include file="includes/footer.jsp" %>
+</div>
 </body>
 </html>
