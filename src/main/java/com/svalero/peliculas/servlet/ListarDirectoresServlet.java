@@ -5,6 +5,7 @@ import com.svalero.peliculas.database.Database;
 import com.svalero.peliculas.model.Directores;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/listar-directores")
+@MultipartConfig
 public class ListarDirectoresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

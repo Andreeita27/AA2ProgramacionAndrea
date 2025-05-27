@@ -6,6 +6,6 @@
     <context-param>
         <description>Ruta para almacenar imágenes de películas</description>
         <param-name>imagePath</param-name>
-        <param-value>C:\apache-tomcat-9.0.105\apache-tomcat-9.0.105\webapps\peliculas\images</param-value>
+        <param-value>C:\apache-tomcat-9.0.105\apache-tomcat-9.0.105\webapps\images</param-value>
     </context-param>
 </web-app>

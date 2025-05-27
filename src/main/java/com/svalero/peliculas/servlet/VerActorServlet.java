@@ -6,12 +6,14 @@ import com.svalero.peliculas.exception.ActorNoEncontradoExcepcion;
 import com.svalero.peliculas.model.Actores;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/ver-actor")
+@MultipartConfig
 public class VerActorServlet extends HttpServlet {
 
     @Override

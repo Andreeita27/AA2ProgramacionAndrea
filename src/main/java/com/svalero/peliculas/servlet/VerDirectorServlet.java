@@ -6,12 +6,14 @@ import com.svalero.peliculas.exception.DirectorNoEncontradoExcepcion;
 import com.svalero.peliculas.model.Directores;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet("/ver-director")
+@MultipartConfig
 public class VerDirectorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

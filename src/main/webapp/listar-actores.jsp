@@ -65,7 +65,7 @@
       com.svalero.peliculas.model.Actores actor = (com.svalero.peliculas.model.Actores) ((java.util.List)request.getAttribute("actores")).get(i); %>
     <tr>
       <td class="align-middle">
-        <img src="images/<%= actor.getImagen() %>" width="80" height="100" alt="imagen actor">
+        <img src="../images/<%= actor.getImagen() %>" width="80" height="100" alt="imagen actor">
       </td>
       <td class="align-middle"><%= actor.getNombre() %></td>
       <td class="align-middle"><%= actor.getNacionalidad() %></td>

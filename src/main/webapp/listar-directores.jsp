@@ -66,7 +66,7 @@
                     (com.svalero.peliculas.model.Directores) ((java.util.List)request.getAttribute("directores")).get(i); %>
         <tr>
             <td class="align-middle">
-                <img src="images/<%= director.getImagen() %>" width="80" height="100" alt="imagen director">
+                <img src="../images/<%= director.getImagen() %>" width="80" height="100" alt="imagen director">
             </td>
             <td class="align-middle"><%= director.getNombre() %></td>
             <td class="align-middle"><%= director.getNacionalidad() %></td>

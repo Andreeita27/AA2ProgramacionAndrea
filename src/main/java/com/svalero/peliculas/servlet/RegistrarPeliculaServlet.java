@@ -35,6 +35,7 @@ public class RegistrarPeliculaServlet extends HttpServlet {
         String fechaEstrenoStr = request.getParameter("fechaEstreno");
         String idDirectorStr = request.getParameter("idDirector");
         boolean disponibleStreaming = request.getParameter("disponibleStreaming") != null;
+        Part imagen = request.getPart("imagen");
 
         List<String> errores = new ArrayList<>();
 
@@ -65,23 +66,22 @@ public class RegistrarPeliculaServlet extends HttpServlet {
             Date fechaEstreno = Date.valueOf(fechaEstrenoStr);
             int idDirector = Integer.parseInt(idDirectorStr);
 
-            Part imagen = request.getPart("imagen");
-            String nombreArchivo = "default.jpg";
-            if (imagen != null && imagen.getSize() > 0) {
-                nombreArchivo = UUID.randomUUID() + ".jpg";
-                String ruta = getServletContext().getInitParameter("imagePath");
-                InputStream inputStream = imagen.getInputStream();
-                Files.copy(inputStream, Path.of(ruta + File.separator + nombreArchivo));
-            }
-
             Peliculas pelicula = new Peliculas();
             pelicula.setTitulo(titulo);
             pelicula.setSinopsis(sinopsis);
             pelicula.setDuracion(duracion);
             pelicula.setFechaEstreno(fechaEstreno);
             pelicula.setDisponibleStreaming(disponibleStreaming);
-            pelicula.setImagen(nombreArchivo);
             pelicula.setIdDirector(idDirector);
+
+            String filename = "default2.jpg";
+            if (imagen.getSize() != 0) {
+                filename =  UUID.randomUUID() + ".jpg";
+                String imagePath = "C:/apache-tomcat-9.0.105/apache-tomcat-9.0.105/webapps/images";
+                InputStream inputStream = imagen.getInputStream();
+                Files.copy(inputStream, Path.of(imagePath + File.separator + filename));
+            }
+            pelicula.setImagen(filename);
 
             peliculasDao.add(pelicula);
 
