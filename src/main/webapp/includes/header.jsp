@@ -14,7 +14,7 @@
 %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.jsp">🎬 Películas</a>
+    <a class="navbar-brand" href="index.jsp">FlixNet</a>
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
         <% if (role == null) { %>
@@ -25,7 +25,7 @@
         <li class="nav-item">
           <a class="nav-link" href="mi-cuenta.jsp">Mi cuenta</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item d-flex align-items-center ms-2">
           <span class="navbar-text text-white me-2">Hola, <%= nombreUsuario %></span>
         </li>
         <li class="nav-item">
