@@ -15,31 +15,36 @@ import java.util.List;
 
 @WebServlet("/listar-actores")
 public class ListarActoresServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         response.setCharacterEncoding("UTF-8");
 
-        int currentPage = 0;
+        int currentPage = 1;
         if (request.getParameter("page") != null) {
             try {
                 currentPage = Integer.parseInt(request.getParameter("page"));
             } catch (NumberFormatException e) {
-                currentPage = 0;
+                currentPage = 1;
             }
         }
+
+        String nombre = request.getParameter("nombre");
+        String retirado = request.getParameter("retirado");
 
         try {
             Database database = new Database();
             database.connect();
 
             ActoresDao actoresDao = new ActoresDao(database.getConnection());
-            List<Actores> actores = actoresDao.getAll(currentPage);
+            List<Actores> actores = actoresDao.getAll(currentPage, nombre, retirado);
 
             request.setAttribute("actores", actores);
             request.setAttribute("currentPage", currentPage);
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("retirado", retirado);
+
             request.getRequestDispatcher("listar-actores.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {

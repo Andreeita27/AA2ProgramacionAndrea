@@ -33,14 +33,32 @@ public class ActoresDao {
         return affectedRows != 0;
     }
 
-    public List<Actores> getAll(int page) throws SQLException {
+    public List<Actores> getAll(int page, String nombre, String retirado) throws SQLException {
         List<Actores> actores = new ArrayList<>();
-        String sql = "SELECT * FROM actores ORDER BY nombre LIMIT ?, ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, page * PAGE_SIZE);
-        statement.setInt(2, PAGE_SIZE);
-        ResultSet resultSet = statement.executeQuery();
+        String sql = "SELECT * FROM actores WHERE 1=1";
 
+        if (nombre != null && !nombre.isEmpty()) {
+            sql += " AND nombre LIKE ?";
+        }
+        if (retirado != null && !retirado.isEmpty()) {
+            sql += " AND retirado = ?";
+        }
+
+        sql += " ORDER BY nombre LIMIT ?, ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        int paramIndex = 1;
+        if (nombre != null && !nombre.isEmpty()) {
+            statement.setString(paramIndex++, "%" + nombre + "%");
+        }
+        if (retirado != null && !retirado.isEmpty()) {
+            statement.setBoolean(paramIndex++, Boolean.parseBoolean(retirado));
+        }
+
+        statement.setInt(paramIndex++, (page - 1) * PAGE_SIZE);
+        statement.setInt(paramIndex, PAGE_SIZE);
+
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
             Actores actor = new Actores();
             actor.setIdActor(resultSet.getInt("id_actor"));
